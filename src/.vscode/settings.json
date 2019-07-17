@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/04768cb4-c659-4946-b8c4-267c27d86ff5/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/servicos-com-back",
+    "appService.deploySubpath": ""
+}
