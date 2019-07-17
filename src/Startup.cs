@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -48,6 +49,12 @@ namespace NovoBackEnd
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            // Configurando o serviço de documentação do Swagger
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Servicos.com API", Version = "v1" });
+            });
+
             services.AddDbContext<ServicoContexto>();
 
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
@@ -69,6 +76,14 @@ namespace NovoBackEnd
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            // Ativando middlewares para uso do Swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json",
+                    "Servicos.com");
+            });
         }
     }
 }
